@@ -15,7 +15,7 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
-  return gulp.src(['app/**/*', 'index.html', 'styles.css', '!app/**/*.ts'], { base : './' })
+  return gulp.src(['app/**/*', 'index.html', '*.css', '!app/**/*.ts'], { base : './' })
     .pipe(gulp.dest('dist'))
 });
 
@@ -27,6 +27,7 @@ gulp.task('copy:libs', ['clean'], function() {
       'node_modules/rxjs/bundles/Rx.js',
       'node_modules/angular2/bundles/angular2.dev.js',
       'node_modules/angular2/bundles/router.dev.js',
+      'node_modules/angular2/bundles/http.js',
       'node_modules/node-uuid/uuid.js',
       'node_modules/immutable/dist/immutable.js'
     ])
@@ -67,9 +68,9 @@ gulp.task('serve', ['build'], function() {
     }
   });
 
-  gulp.watch(['app/**/*', 'index.html', 'styles.css'], ['buildAndReload']);
+  gulp.watch(['app/**/*', 'index.html', 'styles.css', 'timesyncv3.css'], ['buildAndReload']);
 });
 
-gulp.task('build', ['tslint', 'compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', ['tsconfig-glob', 'tslint', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);

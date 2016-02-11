@@ -1,0 +1,65 @@
+<div id="topSection">
+  <p id="title" style="display:inline-block;">TimeSync - v3.0</p>
+  <p style="display:inline-block;">Project:</p>
+  <div class="dropdown" style="display:inline-block; margin-right:15px;">
+    <button id="projBtn" class="btn btn-default btn-xs dropdown-toggle"
+            type="button" data-toggle="dropdown" style="font-size:11px;
+            margin-bottom:2px; height:21.7167px; width:100px; text-align: left;">
+      {{selectedTask?.project_code}}
+      <span class="caret projBtn"></span>
+    </button>
+    <ul id="projectList" class="dropdown-menu">
+      <li *ngFor="#task of tasks"
+          value="{{task.project_id}}"
+          (click) = "onSelectTask(task)">
+        {{task.project_code}}
+      </li>
+    </ul>
+  </div>
+  <div id="chipOptionHolder">
+    <div class="chipOptions" id="chipSizeDiv">
+      <p style="display:inline-block;">Chip Size:</p>
+      <input id="chipSize" autocomplete="off" type="number" name="chipSize" min="135" max="255" step="20" value="195">
+    </div>
+    <div class="chipOptions" id="plotSizeDiv">
+      <p style="display:inline-block;">Plot Size:</p>
+      <input id="plotSize" autocomplete="off" type="number" name="plotSize" min="1" max="5" step="2" value="1">
+    </div>
+    <div class="chipOptions">
+      <p style="display:inline-block;">Zoom: </p>
+      <span class="glyphicon glyphicon-minus"></span>
+      <input id="zoomSize" autocomplete="off" type="range" name="zoomSize" min="0" max="40" value="20">
+      <span class="glyphicon glyphicon-plus"></span>
+    </div>
+    <div class="chipOptions colorOptions">
+      <input id="selectedColor" autocomplete="off" type="color" name="selectedColor" value="#ED2939">
+      <p style="display:inline-block;">Selected</p>
+    </div>
+    <div class="chipOptions colorOptions">
+      <input id="highlightColor" autocomplete="off" type="color" name="highlightColor" value="#32CD32">
+      <p style="display:inline-block;">Highlight</p>
+    </div>
+    <div class="chipOptions colorOptions">
+      <input id="plotColor" autocomplete="off" type="color" name="plotColor" value="#ED2939">
+      <p style="display:inline-block;">Plot</p>
+    </div>
+  </div>
+
+  <button id="saveBtn" class="btn btn-default btn-xs" type="button"
+          style="margin-right:15px; font-size:11px; margin-bottom:2px; height:21.7167px; text-align: left;">
+    <!--; width:50px-->
+    Save
+  </button>
+
+  <div class="dropdown" style="display:inline-block; margin-right:15px;">
+    <button id="helpBtn" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown"
+            style="font-size:11px; margin-bottom:2px; height:21.7167px; text-align: left;"> <!--; width:50px-->
+      Help
+    </button>
+    <ul id="helpList" class="dropdown-menu">
+      <li id="doyCalLi">Calendar</li>
+      <li id="RDLi">Response Design</li>
+      <li>UI Guide</li>
+    </ul>
+  </div>
+</div>

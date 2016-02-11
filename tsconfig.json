@@ -17,7 +17,16 @@
     "node_modules/immutable/dist/immutable.d.ts"
   ],
   "files": [
+    "typings/tsd.d.ts",
+    "typings/node-uuid/node-uuid-base.d.ts",
+    "typings/node-uuid/node-uuid-cjs.d.ts",
+    "typings/node-uuid/node-uuid-global.d.ts",
+    "typings/node-uuid/node-uuid.d.ts",
+    "typings/node/node.d.ts",
+    "node_modules/immutable/dist/immutable.d.ts",
     "app/app.component.ts",
+    "app/banners/task.ts",
+    "app/banners/top-banner.component.ts",
     "app/boot.ts",
     "app/dashboard.component.ts",
     "app/hero-detail.component.ts",
@@ -25,13 +34,10 @@
     "app/hero.ts",
     "app/heroes.component.ts",
     "app/mock-heroes.ts",
-    "typings/node-uuid/node-uuid-base.d.ts",
-    "typings/node-uuid/node-uuid-cjs.d.ts",
-    "typings/node-uuid/node-uuid-global.d.ts",
-    "typings/node-uuid/node-uuid.d.ts",
-    "typings/node/node.d.ts",
-    "typings/tsd.d.ts",
-    "node_modules/immutable/dist/immutable.d.ts"
+    "app/plots/plot.component.ts",
+    "app/plots/plot.ts",
+    "app/services/timesync.service.ts",
+    "app/trajectory/spectral-trajectory.component.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

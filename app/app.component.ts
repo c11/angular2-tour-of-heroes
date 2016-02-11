@@ -1,33 +1,72 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {HeroesComponent} from './heroes.component';
-import {HeroDetailComponent} from './hero-detail.component';
-import {DashboardComponent} from './dashboard.component';
-import {HeroService} from './hero.service';
+import {Component, OnInit} from 'angular2/core';
+import {PlotComponent} from './plots/plot.component';
+import {TopBannerComponent} from './banners/top-banner.component';
+import {TimeSyncService} from './services/timesync.service';
+import {Http} from 'angular2/http';
+import {Task} from './banners/task';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import {Plot} from './plots/plot';
+
 
 @Component({
-  selector: 'my-app',
-  template: `
-    <h1>{{title}}</h1>
-    <a [routerLink]="['Dashboard']">Dashboard</a>
-    <a [routerLink]="['Heroes']">Heroes</a>
-    <router-outlet></router-outlet>
+    selector: 'ts-app',
+    template: `
+    <ts-top-banner [tasks]='tasks'
+        (taskChanged)='onTaskChanged($event)'></ts-top-banner>
+
+    <div id="containerDiv">
+
+      <ts-plot-list [plots]='plots'></ts-plot-list>
+
+    </div>
   `,
-  styles: [`
+    styles: [`
     a {padding: 5px;text-decoration: none;}
     a:visited, a:link {color: #444;}
     a:hover {color: white; background-color: #1171a3;}
     a.router-link-active {color: white; background-color: #52b9e9;}
   `],
-  directives: [ROUTER_DIRECTIVES],
-  providers: [HeroService]
+    directives: [PlotComponent, TopBannerComponent],
+    providers: [TimeSyncService, Http, HTTP_PROVIDERS]
 })
-@RouteConfig([
-  // {path: '/', redirectTo: ['Dashboard'] },
-  {path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true},
-  {path: '/heroes', name: 'Heroes', component: HeroesComponent},
-  {path: '/detail/:id', name: 'HeroDetail', component: HeroDetailComponent}
-])
-export class AppComponent {
-  public title = 'Tour of Heroes';
+export class AppComponent implements OnInit {
+    public title = 'TimeSync V3.0';
+
+    selectedTask: Task;
+    tasks: Task[];
+
+    selectedPlot: Plot;
+    plots: Plot[];
+
+    userID: number;
+    tsa: number;
+
+    constructor(private _tsService: TimeSyncService) {
+        this.userID = 9;
+        this.tsa = 999999;
+    }
+
+    ngOnInit() {
+        this._tsService.getTasks(this.userID)
+            .subscribe(
+                data => this.tasks = data,
+                err => console.error(err),
+                () => console.log('tasks retrieved')
+            );
+    }
+
+    onTaskChanged(task: Task) {
+        this.selectedTask = task;
+        this.getPlots(task);
+    }
+
+    getPlots(task: Task) {
+        this._tsService.getPlots(task.project_id, this.tsa, this.userID)
+            .subscribe(
+                data => {this.plots = data; console.log(data); },
+                err => console.error(err),
+                () => console.log('plots retrieved')
+            );
+        console.log('retrieving plots');
+    }
 }
