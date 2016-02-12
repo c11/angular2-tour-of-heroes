@@ -71,6 +71,6 @@ gulp.task('serve', ['build'], function() {
   gulp.watch(['app/**/*', 'index.html', 'styles.css', 'timesyncv3.css'], ['buildAndReload']);
 });
 
-gulp.task('build', ['tsconfig-glob', 'tslint', 'compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', ['tsconfig-glob', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);

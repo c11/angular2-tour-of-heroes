@@ -6,6 +6,7 @@ import {Http} from 'angular2/http';
 import {Task} from './banners/task';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {Plot} from './plots/plot';
+import {TrajectoryComponent} from './trajectory/spectral-trajectory.component';
 
 
 @Component({
@@ -17,8 +18,10 @@ import {Plot} from './plots/plot';
     <div id="containerDiv">
 
       <ts-plot-list [plots]='plots'></ts-plot-list>
-
+      <ts-trajectory [data]='data'></ts-trajectory>
     </div>
+
+
   `,
     styles: [`
     a {padding: 5px;text-decoration: none;}
@@ -26,7 +29,7 @@ import {Plot} from './plots/plot';
     a:hover {color: white; background-color: #1171a3;}
     a.router-link-active {color: white; background-color: #52b9e9;}
   `],
-    directives: [PlotComponent, TopBannerComponent],
+    directives: [PlotComponent, TopBannerComponent, TrajectoryComponent],
     providers: [TimeSyncService, Http, HTTP_PROVIDERS]
 })
 export class AppComponent implements OnInit {
@@ -40,6 +43,8 @@ export class AppComponent implements OnInit {
 
     userID: number;
     tsa: number;
+
+    data: Array<number> = [10, 20, 30, 40, 50];
 
     constructor(private _tsService: TimeSyncService) {
         this.userID = 9;

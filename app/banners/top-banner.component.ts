@@ -7,7 +7,6 @@ import {Task} from './task';
 @Component({
     selector: 'ts-top-banner',
     templateUrl: 'app/banners/top-banner.component.html'
-    // styleUrls: ['app/dashboard.component.css'],
 })
 export class TopBannerComponent {
     @Input() tasks: Task[];
