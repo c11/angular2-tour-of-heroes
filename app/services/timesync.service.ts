@@ -12,7 +12,7 @@ export class TimeSyncService {
     constructor(private http: Http) { }
 
     getPlots(projectID: number, tsa: number, userID: number) {
-        return this.http.get(`${this.server}/plot/${projectID}/${tsa}/${userID}`)
+        return this.http.get(`${this.server}/plot/${userID}/${projectID}/${tsa}`)
             .map(res => res.json());
     }
 
